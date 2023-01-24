@@ -41,8 +41,8 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        assert page > 0
-        assert page_size > 0
-        index_tuple = index_range(page, page_size)
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
         self.dataset()
+        index_tuple = index_range(page, page_size)
         return self.__dataset[index_tuple[0]:index_tuple[1]]
