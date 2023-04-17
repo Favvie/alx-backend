@@ -61,7 +61,7 @@ class Server:
             next_page = page + 1
 
         data = {
-            "page_size": len(data),
+            "page_size": page,
             "page": page,
             "data": data,
             "next_page": next_page,
