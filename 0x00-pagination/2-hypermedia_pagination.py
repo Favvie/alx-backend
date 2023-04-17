@@ -70,7 +70,5 @@ class Server:
 
         if data["next_page"] > data['total_pages']:
             data['next_page'] = None
-        
-        
 
         return data
