@@ -61,11 +61,11 @@ class Server:
             next_page = page + 1
 
         data = {
-            "page_size": page,
+            "page_size": page_size,
             "page": page,
             "data": data,
             "next_page": next_page,
             "prev_page": prev_page,
-            "total_pages": math.ceil(len(self.__dataset) / page_size)
+            "total_pages": math.ceil(len(dataset) / page_size)
         }
         return data
