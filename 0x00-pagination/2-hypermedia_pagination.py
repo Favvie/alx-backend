@@ -49,23 +49,23 @@ class Server:
         """get hypermedia metadata for specified page and page size"""
         dataset = self.dataset()
         data = self.get_page(page, page_size)
-
-        if page == 1:
-            prev_page = None
-        elif page > 1:
-            prev_page = page - 1
+        total_pages = math.ceil(len(dataset) / page_size)
 
         if self.get_page(page+1, page_size) == []:
             next_page = None
         else:
             next_page = page + 1
 
-        data = {
+        if page == 1:
+            prev_page = None
+        elif page > 1:
+            prev_page = page - 1
+        diction = {
             "page_size": page_size,
             "page": page,
             "data": data,
             "next_page": next_page,
-            "prev_page": prev_page,
-            "total_pages": math.ceil(len(dataset) / page_size)
+            'prev_page': prev_page,
+            "total_pages": total_pages
         }
-        return data
+        return diction
