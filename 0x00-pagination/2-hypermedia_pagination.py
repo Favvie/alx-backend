@@ -48,16 +48,29 @@ class Server:
             Dict[str, int | None]:
         """get hypermedia metadata for specified page and page size"""
         dataset = self.get_page(page, page_size)
+
+        if page == 1:
+            prev_page = None
+        elif page > 1:
+            prev_page = page - 1
+
+        if self.get_page(page+1, page_size) == []:
+            next_page = None
+        else:
+            next_page = page + 1
+
         data = {
             "page_size": len(dataset),
             "page": page,
             "data": dataset,
-            "next_page": page + 1,
-            "prev_page": page - 1,
+            "next_page": next_page,
+            "prev_page": prev_page,
             "total_pages": math.ceil(len(self.__dataset) / page_size)
         }
 
         if data["next_page"] > data['total_pages']:
             data['next_page'] = None
+        
+        
 
         return data
