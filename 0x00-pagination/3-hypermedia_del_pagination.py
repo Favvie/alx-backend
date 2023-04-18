@@ -42,13 +42,14 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> \
             Dict[str, int]:
         """return a dict with pagination parameters"""
-        dataset: Dict[int, List] = self.indexed_dataset()
+        dataset = self.indexed_dataset()
         assert index is not None and index >= 0 and index <= len(dataset)
-        data: List[List] = [item for item in dataset.values()]
-        resultDict: Dict[str, int | List] = {
+        data = [item for item in dataset.values()]
+        trunc_data = data[index: page_size + index]
+        resultDict = {
             "index": index,
-            "next_index": index + page_size,
+            "data": trunc_data,
             "page_size": page_size,
-            "data": data[index: page_size + index]
+            "next_index": index + page_size,
         }
         return resultDict

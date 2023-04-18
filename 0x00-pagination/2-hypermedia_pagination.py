@@ -45,7 +45,7 @@ class Server:
         return dataset[result[0]: result[1]]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> \
-            Dict[str, int | None]:
+            Dict[str, int]:
         """get hypermedia metadata for specified page and page size"""
         dataset = self.dataset()
         data = self.get_page(page, page_size)
