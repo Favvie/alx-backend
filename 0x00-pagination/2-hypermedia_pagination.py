@@ -47,9 +47,8 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> \
             Dict[str, int]:
         """get hypermedia metadata for specified page and page size"""
-        dataset = self.dataset()
+        # dataset = self.dataset()
         data = self.get_page(page, page_size)
-        total_pages = math.ceil(len(dataset) / page_size)
 
         if self.get_page(page+1, page_size) == []:
             next_page = None
@@ -60,12 +59,12 @@ class Server:
             prev_page = None
         elif page > 1:
             prev_page = page - 1
-        diction = {
+        resultDict = {
             "page_size": page_size,
             "page": page,
             "data": data,
             "next_page": next_page,
             'prev_page': prev_page,
-            "total_pages": total_pages
+            "total_pages": math.ceil(len(self.__dataset) / page_size)
         }
-        return diction
+        return resultDict
