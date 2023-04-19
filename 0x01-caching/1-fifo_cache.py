@@ -4,12 +4,13 @@ BaseCache = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCache):
+    """FIFO cache algorithm class"""
     def __init__(self):
         super().__init__()
 
     def put(self, key, item):
         """add an item to the cache using a key"""
-        if key is not None or item is not None:
+        if key and item:
             self.cache_data[key] = item
             if len(self.cache_data) > BaseCache.MAX_ITEMS:
                 first_key = list(self.cache_data.keys())[0]
