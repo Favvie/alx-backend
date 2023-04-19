@@ -11,7 +11,10 @@ class FIFOCache(BaseCache):
     def put(self, key, item):
         """add an item to the cache using a key"""
         if key and item:
+            if key in self.cache_data.keys():
+                self.cache_data.pop(key)
             self.cache_data[key] = item
+
             if len(self.cache_data) > BaseCache.MAX_ITEMS:
                 first_key = list(self.cache_data.keys())[0]
                 del self.cache_data[first_key]
