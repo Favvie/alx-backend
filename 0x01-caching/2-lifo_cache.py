@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """LIFO caching algorithm module"""
-BaseCache = __import__('base_caching').BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
 
 
-class LIFOCache(BaseCache):
+class LIFOCache(BaseCaching):
     def __init__(self) -> None:
         super().__init__()
 
