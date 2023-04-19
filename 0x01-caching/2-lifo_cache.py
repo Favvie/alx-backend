@@ -10,13 +10,13 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         """Add item to cache"""
-        if key is not None or item is not None:
+        if key and item:
             if key in self.cache_data.keys():
                 self.cache_data.pop(key)
             self.cache_data[key] = item
 
             if len(self.cache_data) > self.MAX_ITEMS:
-                lastItemBeforeInsert = list(self.cache_data.keys())[-2]
+                lastItemBeforeInsert = list(self.cache_data.keys())[-1]
                 self.cache_data.pop(lastItemBeforeInsert)
                 print(f'DISCARD: {lastItemBeforeInsert}')
 
