@@ -18,7 +18,7 @@ class FIFOCache(BaseCache):
             if len(self.cache_data) > BaseCache.MAX_ITEMS:
                 first_key = list(self.cache_data.keys())[0]
                 del self.cache_data[first_key]
-                print(f"DISCARD: {first_key}\n")
+                print(f"DISCARD: {first_key}")
 
     def get(self, key):
         """retrieve an item from the cache using a key"""
