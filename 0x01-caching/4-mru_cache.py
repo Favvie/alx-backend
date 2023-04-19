@@ -10,7 +10,7 @@ class MRUCache(BaseCaching):
 
     def put(self, key, item):
         """Add item to cache using mru strategy"""
-        if key is not None or item is not None:
+        if key and item:
             if key in self.cache_data.keys():
                 self.cache_data.pop(key)
             data = {
