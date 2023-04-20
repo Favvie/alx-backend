@@ -26,11 +26,15 @@ class LFUCache(BaseCaching):
 
             if len(self.cache_data) > self.MAX_ITEMS:
                 # min_used = min(self.useCount.values())
-                min_used = min(self.useCount.items(), key=lambda x: x[1])[1]
-                print(f"min_used: {min_used}")
+                useCountLast = list(self.useCount.values())
+                useCountLast = useCountLast[:-1]
+                min_used = min(useCountLast)
+                # print(f"min_used: {min_used}")
                 leastUsedKeys = [key for key in self.useCount.keys() if
                                  self.useCount[key] == min_used]
-                print(f"leastusedkeys: {leastUsedKeys}")
+                leastUsedKeys = leastUsedKeys[:-1]
+
+                # print(f"leastusedkeys: {leastUsedKeys}")
 
                 if len(leastUsedKeys) > 1:
                     lruItem = leastUsedKeys[0]
@@ -38,7 +42,6 @@ class LFUCache(BaseCaching):
                     self.useCount.pop(lruItem)
                     print(f'DISCARD: {lruItem}')
                 elif len(leastUsedKeys) == 1:
-                    # leastItem = leastKeys[0]
                     self.cache_data.pop(leastUsedKeys[0])
                     self.useCount.pop(leastUsedKeys[0])
                     print(f'DISCARD: {leastUsedKeys[0]}')
@@ -51,11 +54,6 @@ class LFUCache(BaseCaching):
             return None
         if key in self.cache_data.keys():
             count = self.useCount[key]
-            item = self.cache_data.pop(key)
-            data = {
-                key: item
-            }
-            self.cache_data = {**data, **self.cache_data}
         count += 1
         self.useCount[key] = count
         return self.cache_data[key]
