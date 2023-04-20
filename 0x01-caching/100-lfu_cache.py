@@ -22,19 +22,14 @@ class LFUCache(BaseCaching):
                 self.useCount[key] += 1
             else:
                 self.useCount[key] = 0
-            print(f'useCount: {self.useCount}')
 
             if len(self.cache_data) > self.MAX_ITEMS:
-                # min_used = min(self.useCount.values())
                 useCountLast = list(self.useCount.values())
                 useCountLast = useCountLast[:-1]
                 min_used = min(useCountLast)
-                # print(f"min_used: {min_used}")
+
                 leastUsedKeys = [key for key in self.useCount.keys() if
                                  self.useCount[key] == min_used]
-                leastUsedKeys = leastUsedKeys[:-1]
-
-                # print(f"leastusedkeys: {leastUsedKeys}")
 
                 if len(leastUsedKeys) > 1:
                     lruItem = leastUsedKeys[0]
